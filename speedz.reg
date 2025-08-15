@@ -1,0 +1,27 @@
+Windows Registry Editor Version 5.00
+
+; ===== Speedzz Internet Tweaks =====
+
+; Enable TCP Auto-Tuning
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters]
+"Tcp1323Opts"=dword:00000001
+
+; Enable ECN Capability
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters]
+"EnableECN"=dword:00000001
+
+; Disable Nagle's Algorithm (you may need to duplicate these keys for each network interface's GUID)
+; TcpAckFrequency = 1, TCPNoDelay = 1
+; Replace {INTERFACE-GUID} with your actual network adapter's GUID (found in registry under Interfaces)
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\{INTERFACE-GUID}]
+"TcpAckFrequency"=dword:00000001
+"TCPNoDelay"=dword:00000001
+
+; Increase DNS Cache Size
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Dnscache\Parameters]
+"MaxCacheTtl"=dword:00015180
+"MaxNegativeCacheTtl"=dword:00000000
+
+; Remove QoS bandwidth limit
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Psched]
+"NonBestEffortLimit"=dword:00000000
